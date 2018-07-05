@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="896px" height="896px" viewBox="0 0 896 896" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>table</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="table" fill-rule="nonzero">
+            <polygon id="Shape" fill-opacity="0.7" fill="#49A9EE" points="0 174.2 896 174.2 896 199.1 0 199.1"></polygon>
+            <polygon id="Shape" fill-opacity="0.8" fill="#ADD7FA" points="25 25 871 25 871 174 772.520622 174 25 174"></polygon>
+            <path d="M298.7,174.2 L323.6,174.2 L323.6,896 L298.7,896 L298.7,174.2 Z M572.4,174.2 L597.3,174.2 L597.3,896 L572.4,896 L572.4,174.2 Z" id="Shape" fill-opacity="0.7" fill="#46A6F0"></path>
+            <path d="M0,348.4 L896,348.4 L896,373.3 L0,373.3 L0,348.4 Z M0,522.7 L896,522.7 L896,547.6 L0,547.6 L0,522.7 Z M0,696.9 L896,696.9 L896,721.8 L0,721.8 L0,696.9 Z" id="Shape" fill-opacity="0.7" fill="#46A6F0"></path>
+            <path d="M871.1,24.9 L871.1,871.1 L24.9,871.1 L24.9,24.9 L871.1,24.9 Z M896,0 L0,0 L0,896 L896,896 L896,0 Z" id="Shape" fill-opacity="0.7" fill="#46A6F0"></path>
+        </g>
+    </g>
+</svg>
