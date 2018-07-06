@@ -101,16 +101,16 @@
             el: "#vueapp",
             data: {
 				items:[
-					{name:"农产品", id:"", image:"img/tour/shuiguo2.png"},
-					{name:"手工产品", id:"", image:"img/tour/shougong.png"},
-					{name:"畜牧产品", id:"", image:"img/tour/niu.png"},
-					{name:"其他", id:"", image:"img/tour/other.png"},
+					{name:"农产品", id:"5b3ec4d27414fe11cc6baea8", image:"img/tour/shuiguo2.png"},
+					{name:"手工产品", id:"5b3ec9c17414fe11cc6baeaa", image:"img/tour/shougong.png"},
+					{name:"畜牧产品", id:"5b3ec5d67414fe11cc6baea9", image:"img/tour/niu.png"},
+					{name:"其他", id:"5b3ec9e47414fe11cc6baeab", image:"img/tour/other.png"},
 				]
             },
             methods: {
-				category: function(item){
-					window.href = "category.hmlt?id="+item.id
-				}
+							category: function(item){
+								window.location.href = "category.html?id="+item.id
+							}
             },
             mounted: function() {
 				
