@@ -56,8 +56,8 @@
 .sub-title{
   font-size: 18px;
     font-weight: 500;
-    border-left: 3px solid #b6f5ffb0;
-    padding-left: 10px;
+    /* border-left: 3px solid #b6f5ffb0;
+    padding-left: 10px; */
     margin: 10px 0
 }
 
@@ -87,10 +87,15 @@
     padding: 0px 20px;
     font-size: 15px;
 }
+
+body{
+  width: 100%;
+  overflow-x: hidden;
+}
 	</style>
 </head>
 
-<body>
+<body style="">
 	<header class="head2home">
 		<a onclick="showMenu()">
 			<img src="img/home.png" alt="" class="src" style="    width: 30px;
@@ -128,7 +133,7 @@
         <img :src="currentImage" alt="" v-show="currentImage" style="width:100%; border-radius:10px; box-shadow: 2px 2px 13px 0px rgba(128, 128, 128, 0.5)">
     </div>
 
-    <div style="width: 100%; padding: 10px 20px">
+    <div style="width: 100%; padding: 10px 0px; margin-left: 20px">
         <div class="image_swiper swiper-container" style="" v-show="item.image_list">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="img in item.image_list" style="margin-right: 10px">
@@ -313,6 +318,7 @@
                             var sources = video.getElementsByTagName('source');
                             sources[0].src = self.item.vedio;
                             video.load();
+                            video.pause();
 
                           }
                         } else {
