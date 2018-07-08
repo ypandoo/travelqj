@@ -89,8 +89,8 @@
 }
 
 body{
-  width: 100%;
-  overflow-x: hidden;
+  /* width: 100%;
+  overflow-x: hidden; */
 }
 	</style>
 </head>
@@ -133,17 +133,20 @@ body{
         <img :src="currentImage" alt="" v-show="currentImage" style="width:100%; border-radius:10px; box-shadow: 2px 2px 13px 0px rgba(128, 128, 128, 0.5)">
     </div>
 
-    <div style="width: 100%; padding: 10px 0px; margin-left: 20px">
+    <div style="position: relative; height: 90px;">
+      <div style="width: 100%; padding: 10px 0px; position: absolute; left:20px">
         <div class="image_swiper swiper-container" style="" v-show="item.image_list">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="img in item.image_list" style="margin-right: 10px">
-                    <div class="" @click="activeImage(img)">
-                        <img :src="img" alt="" width="80px" height="55px" style="border-radius: 5px; box-sizing: border-box;" v-bind:class="{ selected: img == currentImage}"> 
-                    </div>
-                </div>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="img in item.image_list" style="margin-right: 10px">
+              <div class="" @click="activeImage(img)">
+                <img :src="img" alt="" width="80px" height="55px" style="border-radius: 5px; box-sizing: border-box;" v-bind:class="{ selected: img == currentImage}">
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+
 
     <div style="padding: 10px 20px 10px 20px; border-top: 1px solid rgba(0,0,0,0.1)" v-show="item.vedio">
         <p class="sub-title">语音解说<br><span>Audio Guide</span></p>
