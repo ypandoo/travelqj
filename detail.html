@@ -179,6 +179,22 @@ body{
                 英文解说
               </p>
             </a>
+            <a @click="playAudio('jp')" class="weui-grid"  v-show="item.audio_jp">
+              <div class="weui-grid__icon">
+                <img src="img/tour/yuyin.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                日语解说
+              </p>
+            </a>
+            <a @click="playAudio('tu')" class="weui-grid"  v-show="item.audio_tu">
+              <div class="weui-grid__icon">
+                <img src="img/tour/yuyin.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                西班牙语解说
+              </p>
+            </a>
           </div>	
     </div>
 
@@ -235,6 +251,8 @@ body{
                 window.audio_zy.pause()
                 window.audio_zh.pause()
                 window.audio_en.pause()
+                window.audio_jp.pause()
+                window.audio_tu.pause()
               },
               playAudio:function(lang){
                       this.pauseAllAudio()
@@ -259,6 +277,18 @@ body{
                             window.audio_zy.play();
                         } else {
                             window.audio_zy.pause();
+                        }
+                      }else if(lang == 'jp'){
+                        if (window.audio_jp.paused) {
+                            window.audio_jp.play();
+                        } else {
+                            window.audio_jp.pause();
+                        }
+                      }else if(lang == 'tu'){
+                        if (window.audio_tu.paused) {
+                            window.audio_tu.play();
+                        } else {
+                            window.audio_tu.pause();
                         }
                       }else{
                         alert('不支持的种类')
@@ -315,6 +345,18 @@ body{
                             window.source_en.type = "audio/mpeg" ;
                             window.source_en.src = self.item.audio_en ;
                             window.audio_en.appendChild(window.source_en);
+
+                            window.audio_jp = document.createElement("audio");
+                            window.source_jp = document.createElement("source");
+                            window.source_jp.type = "audio/mpeg" ;
+                            window.source_jp.src = self.item.audio_jp ;
+                            window.audio_jp.appendChild(window.source_jp);
+
+                            window.audio_tu = document.createElement("audio");
+                            window.source_tu = document.createElement("source");
+                            window.source_tu.type = "audio/mpeg" ;
+                            window.source_tu.src = self.item.audio_tu ;
+                            window.audio_tu.appendChild(window.source_tu);
 
                             //vedio
                             var video = document.getElementsByTagName('video')[0];
