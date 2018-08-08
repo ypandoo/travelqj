@@ -82,7 +82,7 @@
 			<p class="page__desc">Online Shop</p>
 		</div>
 	
-		<div class="weui-grids">
+		<!-- <div class="weui-grids">
 			<a @click="category(item)" class="weui-grid"  v-for="item in items">
 				<div class="weui-grid__icon">
 					<img :src="item.image" alt="">
@@ -91,7 +91,25 @@
 					{{item.name}}
 				</p>
 			</a>
-		</div>	
+		</div> -->
+		
+
+	<div class="weui-panel" style="    padding-left: 5%; margin-bottom: 5%">
+			<!-- <div class="weui-panel__hd">小图文组合列表</div> -->
+			<div class="weui-panel__bd">
+					<div class="weui-media-box weui-media-box_small-appmsg">
+							<div class="weui-cells">
+									<a class="weui-cell weui-cell_access" @click="category(item)" v-for="item in items">
+											<div class="weui-cell__bd weui-cell_primary">
+													<p>{{item.name}}</p>
+											</div>
+											<span class="weui-cell__ft"></span>
+									</a>
+							</div>
+					</div>
+			</div>
+	</div>
+
 	</div>
 
 	<script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
@@ -101,10 +119,18 @@
             el: "#vueapp",
             data: {
 				items:[
-					// {name:"农产品", id:"5b3ec4d27414fe11cc6baea8", image:"img/tour/shuiguo2.png"},
-					{name:"达瓦卓玛服饰", id:"5b5684397414fe11cc6baeb4", image:"img/tour/shougong.png"},
 					{name:"强钦美酒", id:"5b5684937414fe11cc6baeb5", image:"img/tour/jiu.png"},
-					{name:"水晶玉石", id:"5b56867d7414fe11cc6baeb6", image:"img/tour/shi.png"},
+					{name:"下水乡江瑟农产品专业合作社", id:"5b68178b93808f6bc8f66002", image:"img/tour/shi.png"},
+					{name:"赛隆农畜产品加工合作社", id:"5b6818b693808f6bc8f66003", image:"img/tour/shi.png"},
+					{name:"下水乡康德林农畜产品专业合作社", id:"5b6818d993808f6bc8f66004", image:"img/tour/shi.png"},
+					{name:"达瓦卓玛民族服饰手工业加工合作社", id:"5b6818fc93808f6bc8f66005", image:"img/tour/shi.png"},
+					{name:"拉玉乡德庆村多吉铁艺合作社", id:"5b68191d93808f6bc8f66006", image:"img/tour/shi.png"},
+					{name:"拉玉乡仁增藏式家具农民专业合作社", id:"5b68193893808f6bc8f66007", image:"img/tour/shi.png"},
+					{name:"索欧农民扶贫家具专业合作社", id:"5b68194f93808f6bc8f66008", image:"img/tour/shi.png"},
+					{name:"琼玉水晶玉石厂", id:"5b68196c93808f6bc8f66009", image:"img/tour/shi.png"},
+					{name:"琼结镇琼果绿色食品农民专业合作社", id:"5b68198793808f6bc8f6600a", image:"img/tour/shi.png"},
+					{name:"下水乡扶农藏鸡养殖专业合作社", id:"5b6819a493808f6bc8f6600b", image:"img/tour/shi.png"},
+					{name:"加罗藏式家具制作专业合作社", id:"5b6819bc93808f6bc8f6600c", image:"img/tour/shi.png"},
 				]
             },
             methods: {
