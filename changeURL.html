@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>乐游琼结</title>
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui,viewport-fit=cover"
+	/>
+	<meta name="format-detection" content="telephone=no,address=no" />
+	<meta name="referrer" content="always" />
+	<meta name="apple-mobile-web-app-capable" content="no" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="no" />
+
+	<script src="js/header.js"></script>
+	<script src="js/flexible.js"></script>
+    <script src="js/base.js"></script>
+    <script src="js/site_base.js"></script>
+	<script src="js/swiper-3.3.1.min.js"></script>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="css/notes-list.css" />
+	<link rel="stylesheet" type="text/css" href="css/swiper-3.3.1.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/ui.css" />
+	<link rel="stylesheet" type="text/css" href="css/header.css" />
+	<link href="https://cdn.bootcss.com/weui/1.1.2/style/weui.css" rel="stylesheet">
+	<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+
+	<style>
+		.page__hd {
+			padding: 15px 20px;
+		}
+		.page__title {
+			text-align: left;
+			font-size: 20px;
+			font-weight: 500;
+		}
+    .page__desc {
+        margin-top: 5px;
+        color: #888;
+        text-align: left;
+        font-size: 14px;
+    }
+		.weui-grid__icon {
+			width: 30px;
+			height: 30px;
+			margin: 0 auto;
+    }
+    .weui-media-box__desc {
+    color: #999999;
+    font-size: 12px;
+}
+.weui-media-box_appmsg .weui-media-box__thumb {
+    vertical-align: middle;
+}
+	</style>
+</head>
+
+<body>
+	<header class="head2home">
+		<a onclick="showMenu()">
+			<img src="img/home.png" alt="" class="src" style="    width: 30px;
+			padding: 10px;">
+		</a>
+	</header>
+
+	<div class="menu" id='menu' style="display:none">
+		<ul class="menu-container">
+				<li class="menu-item">
+						<a href="menu-tour.html">游客中心</a>
+				</li>
+				<li class="menu-item">
+						<a href="menu-online.html">线上游览</a>
+				</li>
+				<li class="menu-item">
+						<a href="menu-shop.html">掌上购物</a>
+				</li>
+		</ul>
+	</div>
+	
+	<div id="vueapp">
+		<transition enter-active-class="animated bounceOutRight">
+			<div>
+				<img :src="item.url" alt="" width="100%">
+			</div> 
+    </transition>
+    
+    <input type="button"  style="width: 100%" @click="changeURLArticle()" value="更改Article URL"> </el-button>
+    <input type="button"  style="width: 100%" @click="changeURLCategory()" value="更改Category URL"> </el-button>
+
+	</div>
+
+	<script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+
+	<script type="text/javascript">
+    window.vueapp = new Vue({
+            el: "#vueapp",
+            data: {
+              item:{title:"", desc:"", url:""},
+              list:[],
+              currentPage: 0,
+              pages: 0,
+              limit: 10,
+              id: "",
+            },
+            computed:{
+              showMore: function(){
+                return this.currentPage < this.pages
+              }
+            },
+            methods: {
+              more: function(){
+                this.currentPage++;
+                this.getList()
+              },
+              detail: function(article){
+                window.location.href = 'detail.html?id='+article._id
+              },
+
+              getList: function(){
+                var self = this
+                var submitData = {"page":0, "limit": 10000}
+
+                //banner
+                Vue.http.post(window.serviceUrl + '/article/list', submitData)
+                    .then(function (res) {
+                         console.log('------------Article List-----------------')
+                        console.log(res);
+                        if (res.body.error_code == 0) {
+                          self.list = self.list.concat(res.body.items)
+                          self.currentPage = res.body.page
+                          self.pages = res.body.pages
+                          
+                          for(item in self.list){
+                            self.changeOneURLArticle(self.list[item])
+                          }
+                        } else {
+
+                        }
+                    }, function (res) {
+                        alert('系统发生未知错误,请联系我们')
+                  });
+              },
+
+              getCategoryList: function(){
+                var self = this
+                var submitData = {"page":0, "limit": 10000}
+
+                //banner
+                Vue.http.post(window.serviceUrl + '/category/list', submitData)
+                    .then(function (res) {
+                         console.log('------------Category List-----------------')
+                        console.log(res);
+                        if (res.body.error_code == 0) {
+                          self.list_category = self.list.concat(res.body.items)
+                          self.currentPage = res.body.page
+                          self.pages = res.body.pages
+                          
+                          for(item in self.list_category){
+                            self.changeOneURLCategory(self.list_category[item])
+                          }
+                        } else {
+
+                        }
+                    }, function (res) {
+                        alert('系统发生未知错误,请联系我们')
+                  });
+              },
+
+            changeOneURLCategory: function(item){
+                var orginalURL = 'http://pb8evo3jr.bkt.clouddn.com'
+                var replaceURL = 'http://qiongjie.vnewcd.com'
+
+                var new_url = item.url
+                if(item.url){
+                  new_url = item.url.replace(orginalURL, replaceURL)
+                }
+
+                const submitData = {
+                  'id': item._id,
+                  'title': item.title,
+                  'desc': item.desc,
+                  'url': new_url,
+                  'sort': item.sort,
+                }
+
+                console.log('------------Update data-----------------')
+                console.log(submitData)
+
+                //banner
+                Vue.http.post(window.serviceUrl + '/category/update', submitData)
+                    .then(function (res) {
+                         console.log('------------category/update-----------------')
+                        console.log(res);
+                        if (res.body.error_code == 0) {
+                          console.log(res)
+                        } else {
+
+                        }
+                    }, function (res) {
+                        alert('系统发生未知错误,请联系我们')
+                  });
+              },
+
+              changeOneURLArticle: function(item){
+                var orginalURL = 'http://pb8evo3jr.bkt.clouddn.com'
+                var replaceURL = 'http://qiongjie.vnewcd.com'
+                var new_image_list = item.image_list
+                if(item.image_list){
+                  new_image_list = item.image_list.map(function(obj) { 
+                      return obj.replace(orginalURL, replaceURL)
+                    });
+                }
+                var new_vedio = item.vedio
+                if(item.vedio){
+                  new_vedio = item.vedio.replace(orginalURL, replaceURL)
+                }
+                var new_audio_en = item.audio_en
+                if(item.audio_en){
+                  new_audio_en = item.audio_en.replace(orginalURL, replaceURL)
+                }
+                var new_audio_jp = item.audio_jp
+                if(item.audio_jp){
+                  new_audio_jp = item.audio_jp.replace(orginalURL, replaceURL)
+                }
+                var new_audio_tu = item.audio_tu
+                if(item.audio_tu){
+                  new_audio_tu = item.audio_tu.replace(orginalURL, replaceURL)
+                }
+                var new_audio_zh = item.audio_zh
+                if(item.audio_zh){
+                  new_audio_zh = item.audio_zh.replace(orginalURL, replaceURL)
+                }
+                var new_audio_zy = item.audio_zy
+                if(item.audio_zy){
+                  new_audio_zy = item.audio_zy.replace(orginalURL, replaceURL)
+                }
+                var new_content = item.content
+                if(item.content){
+                  new_content = item.content.replace(orginalURL, replaceURL)
+                }
+                var new_cover_url = item.cover_url
+                if(item.content){
+                  new_cover_url = item.cover_url.replace(orginalURL, replaceURL)
+                }
+
+                const submitData = {
+                  'id': item._id,
+                  'title': item.title,
+                  'desc': item.desc,
+                  'url': item.image_uri,
+                  'content' : new_content,
+                  'author': item.author,
+                  'type': item.type._id,
+                  'publish_date':item.publish_date,
+                  'cover_url': new_cover_url,
+                  "audio_zh" : new_audio_zh,
+                  "audio_zy" : new_audio_zy,
+                  "audio_en" : new_audio_en,
+                  "audio_jp" : new_audio_jp,
+                  "audio_tu" : new_audio_tu,
+                  "vedio" : new_vedio,
+                  "image_list" : new_image_list
+                }
+
+                console.log('------------Update data-----------------')
+                console.log(submitData)
+
+                //banner
+                Vue.http.post(window.serviceUrl + '/article/update', submitData)
+                    .then(function (res) {
+                         console.log('------------article/update-----------------')
+                        console.log(res);
+                        if (res.body.error_code == 0) {
+                          console.log(res)
+                        } else {
+
+                        }
+                    }, function (res) {
+                        alert('系统发生未知错误,请联系我们')
+                  });
+              },
+
+              changeURLArticle: function(){
+                this.getList()
+              },
+
+              changeURLCategory: function(){
+                this.getCategoryList()
+              }
+            },
+            mounted: function() {
+
+            }
+        });
+	</script>
+
+
+
+</body>
+
+</html>
